@@ -2,12 +2,12 @@
 //                   HEADER FILE USED IN PROJECT
 //****************************************************************
 
-#include<conio.h>
 #include<stdio.h>
-#include<process.h>
-#include<fstream.h>
-#include<iomanip.h>
+#include<iostream>
+#include<fstream>
+#include<iomanip>
 
+using namespace std;
 //***************************************************************
 //                   CLASS USED IN PROJECT
 //****************************************************************
@@ -37,8 +37,8 @@ public:
     {
         cout<<"\nEnter The roll number of student ";
         cin>>rollno;
-        cout<<"\n\nEnter The Name of student ";
-        gets(name);
+        cout<<"\nEnter The Name of student ";
+        fgets(name,30,stdin);
         cout<<"\nEnter The marks in physics out of 100 : ";
         cin>>p_marks;
         cout<<"\nEnter The marks in chemistry out of 100 : ";
@@ -97,7 +97,7 @@ void write_student()
     fp.write((char*)&st,sizeof(student));
     fp.close();
     cout<<"\n\nstudent record Has Been Created ";
-    getch();
+    
 }
 
 
@@ -108,17 +108,17 @@ void write_student()
 
 void display_all()
 {
-    clrscr();
+    
     cout<<"\n\n\n\t\tDISPLAY ALL RECORD !!!\n\n";
     fp.open("student.dat",ios::in);
     while(fp.read((char*)&st,sizeof(student)))
     {
         st.showdata();
         cout<<"\n\n====================================\n";
-        getch();
+        
     }
     fp.close();
-    getch();
+    
 }
 
 
@@ -135,7 +135,7 @@ void display_sp(int n)
     {
         if(st.retrollno()==n)
         {
-            clrscr();
+            
             st.showdata();
             flag=1;
         }
@@ -143,7 +143,7 @@ void display_sp(int n)
     fp.close();
     if(flag==0)
         cout<<"\n\nrecord not exist";
-    getch();
+    
 }
 
 
@@ -155,7 +155,7 @@ void display_sp(int n)
 void modify_student()
 {
     int no,found=0;
-    clrscr();
+    
     cout<<"\n\n\tTo Modify ";
     cout<<"\n\n\tPlease Enter The roll number of student";
     cin>>no;
@@ -177,7 +177,7 @@ void modify_student()
     fp.close();
     if(found==0)
         cout<<"\n\n Record Not Found ";
-    getch();
+    
 }
 
 
@@ -189,7 +189,7 @@ void modify_student()
 void delete_student()
 {
     int no;
-    clrscr();
+    
     cout<<"\n\n\n\tDelete Record";
     cout<<"\n\nPlease Enter The roll number of student You Want To Delete";
     cin>>no;
@@ -209,7 +209,7 @@ void delete_student()
     remove("student.dat");
     rename("Temp.dat","student.dat");
     cout<<"\n\n\tRecord Deleted ..";
-    getch();
+    
 }
 
 
@@ -219,13 +219,13 @@ void delete_student()
 
 void class_result()
 {
-    clrscr();
+    
     fp.open("student.dat",ios::in);
     if(!fp)
     {
         cout<<"ERROR!!! FILE COULD NOT BE OPEN\n\n\n Go To Entry Menu to create File";
         cout<<"\n\n\n Program is closing ....";
-        getch();
+        
         exit(0);
     }
 
@@ -239,7 +239,7 @@ void class_result()
         st.show_tabular();
     }
     fp.close();
-    getch();
+    
 }
 
 
@@ -253,7 +253,7 @@ void result()
 {
     int ans,rno;
     char ch;
-    clrscr();
+    
     cout<<"\n\n\nRESULT MENU";
     cout<<"\n\n\n1. Class Result\n\n2. Student Report Card\n\n3.Back to Main Menu";
     cout<<"\n\n\nEnter Choice (1/2)? ";
@@ -267,7 +267,7 @@ void result()
     {
         do
         {
-            clrscr();
+            
             char ans;
             cout<<"\n\nEnter Roll Number Of Student : ";
             cin>>rno;
@@ -292,16 +292,13 @@ void result()
 
 void intro()
 {
-    clrscr();
-    gotoxy(35,11);
+    
     cout<<"STUDENT";
-    gotoxy(33,14);
     cout<<"REPORT CARD";
-    gotoxy(35,17);
     cout<<"PROJECT";
     cout<<"\n\nMADE BY : Anubhab Sarkar";
     cout<<"\n\nCONTACT : anubhab.sarkar@apeejayschool.com";
-    getch();
+    
 
 }
 
@@ -313,7 +310,7 @@ void intro()
 //****************************************************************
 void entry_menu()
 {
-    clrscr();
+    
     char ch2;
     cout<<"\n\n\n\tENTRY MENU";
     cout<<"\n\n\t1.CREATE STUDENT RECORD";
@@ -323,11 +320,11 @@ void entry_menu()
     cout<<"\n\n\t5.DELETE STUDENT RECORD";
     cout<<"\n\n\t6.BACK TO MAIN MENU";
     cout<<"\n\n\tPlease Enter Your Choice (1-6) ";
-    ch2=getche();
+    ch2=getchar();
     switch(ch2)
     {
     case '1':
-        clrscr();
+        
         write_student();
         break;
     case '2':
@@ -335,7 +332,7 @@ void entry_menu()
         break;
     case '3':
         int num;
-        clrscr();
+        
         cout<<"\n\n\tPlease Enter The roll number ";
         cin>>num;
         display_sp(num);
@@ -360,23 +357,23 @@ void entry_menu()
 //****************************************************************
 
 
-void main()
+int main()
 {
     char ch;
     intro();
     do
     {
-        clrscr();
+        
         cout<<"\n\n\n\tMAIN MENU";
         cout<<"\n\n\t01. RESULT MENU";
         cout<<"\n\n\t02. ENTRY/EDIT MENU";
         cout<<"\n\n\t03. EXIT";
         cout<<"\n\n\tPlease Select Your Option (1-3) ";
-        ch=getche();
+        ch=getchar();
         switch(ch)
         {
         case '1':
-            clrscr();
+            
             result();
             break;
         case '2':
